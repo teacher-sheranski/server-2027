@@ -27,7 +27,10 @@ export const getProductById = async (req, res, next) => {
         const product = await Product.findById(id);
 
         if (!product) {
-            return res.status(404).json({ error: 'product not found' });
+            const x = { err }
+            throw x;
+            
+            // return res.status(404).json({ error: 'product not found' });
         }
 
         return res.json(product);
@@ -38,6 +41,9 @@ export const getProductById = async (req, res, next) => {
 
 export const addProduct = async (req, res, next) => {
     try {
+        // if (req.body.price > 0 && req.body.name.length >= 2)
+            
+
         const newProduct = new Product(req.body);
         await newProduct.save();
         res.status(201).json(newProduct);
@@ -48,6 +54,8 @@ export const addProduct = async (req, res, next) => {
 
 export const updateProduct = async (req, res, next) => {
     try {
+        console.log(req.body);
+        
         const { id } = req.params; // פרמטרים חובה מזהי משאב
 
         if (!isValidObjectId(id))
