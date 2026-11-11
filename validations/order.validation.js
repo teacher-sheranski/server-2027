@@ -12,7 +12,6 @@ export const orderSchema = Joi.object({
         Joi.object({
             _id: Joi.string().hex().length(24).required(),
             name: Joi.string(),
-            price: Joi.number(),
             amount: Joi.number().integer().positive().required(),
         })
     ).min(1).required(),
