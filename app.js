@@ -3,7 +3,7 @@ import { connectDB } from './config/db.js';
 import productRouter from './routes/product.router.js';
 import userRouter from './routes/user.router.js';
 import { printMsg } from './middlewares/custom.middleware.js';
-import { errorHandler } from './middlewares/errors.middleware.js';
+import { errorHandler, pathNotFound } from './middlewares/errors.middleware.js';
 
 // 1. יצירת שרת אקספרס
 const app = express();
@@ -28,6 +28,9 @@ app.use(printMsg);
 
 app.use('/products', productRouter);
 app.use('/users', userRouter);
+
+// כתובת לא נמצאה
+app.use(pathNotFound);
 
 // catch - יתפוס את כל השגיאות
 // חייב להיות בסוף

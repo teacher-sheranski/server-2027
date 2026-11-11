@@ -1,5 +1,5 @@
 
-import { AppError } from "../utils/AppErrors.js";
+import { AppError } from "../utils/AppError.js";
 
 
 // middleware creator

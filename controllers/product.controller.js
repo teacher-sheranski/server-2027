@@ -1,6 +1,6 @@
 import { isValidObjectId } from "mongoose";
 import Product from "../models/product.model.js";
-import { AppError } from "../utils/AppErrors.js";
+import { AppError } from "../utils/AppError.js";
 
 export const getAllProducts = async (req, res) => {
     const { page = 1, limit = 10 } = req.query; // ? פרמטרים לא חובה עם ערכי ברירת מחדל
