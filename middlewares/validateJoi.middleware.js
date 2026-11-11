@@ -1,4 +1,6 @@
 
+import { AppError } from "../utils/AppErrors.js";
+
 
 // middleware creator
 // Joi בדיקות תקינות על הבאדי ע"י
@@ -15,8 +17,7 @@ export const validateBody = (schema) => {
         const { error, value } = schema.validate(req.body);
 
         if (error) {
-            // אם חזרה שגיאה נחזיר אותה ללקוח
-            res.status(409).json(error);
+            throw new AppError(error.message, 409, "validation-error");
         } else {
             // עדכון הבאדי לאחר ההמרה
             req.body = value;
