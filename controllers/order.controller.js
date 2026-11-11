@@ -48,7 +48,7 @@ export const addOrder = async (req, res) => {
     // מחזיר מערך מוצרים מהדטהבייס שזהים לקודים שנשלחו
     const products = await Product.find({ _id: { $in: productIds } });
 
-    // TODO: לסדר את המוצרים שלא יהיו כפולים, לאחד עם amount
+    // בודקים שכל המוצרים שהוזמנו קיימים; אם אחד חסר, מחזירים 404
     const productsById = new Map(products.map((product) => [product.id.toLowerCase(), product]));
 
     if (productsById.size !== new Set(productIds).size) {
