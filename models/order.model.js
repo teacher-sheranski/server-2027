@@ -1,4 +1,4 @@
-import { Schema, SchemaTypes } from "mongoose";
+import { model, Schema, SchemaTypes } from "mongoose";
 
 const orderSchema = new Schema({
     date: Date,
