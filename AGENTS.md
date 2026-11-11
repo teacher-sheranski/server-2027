@@ -1,0 +1,1 @@
+- use `throw AppError(...)` for error handling
