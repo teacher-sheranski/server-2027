@@ -3,12 +3,15 @@
 
 import User from "../models/user.model.js";
 import { AppError } from '../utils/AppError.js';
+import { createToken } from "../utils/jwt.js";
 
 // הרשמה
 export const register = async (req, res, next) => {
     const user = new User(req.body);
     await user.save();
-    res.status(201).json(user);
+
+    const token = createToken(user);
+    res.status(201).json({ username: user.username, token });
 };
 
 // התחברות
@@ -28,7 +31,11 @@ export const login = async (req, res, next) => {
     if (!result)
         throw new AppError('invalid username or password', 404);
 
-    res.json(user);
+    const token = createToken(user);
+
+    // נחזיר רק נתונים רלוונטיים
+    // לא נחזיר סיסמאות וכולי
+    res.json({ username: user.username, token });
 };
 
 export const updatePassword = (req, res, next) => { };
