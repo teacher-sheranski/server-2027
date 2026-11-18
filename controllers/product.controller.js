@@ -47,12 +47,17 @@ export const updateProduct = async (req, res) => {
         throw new AppError("product not found", 404, "not-found");
     }
 
+    // ======= עדכונים אפשריים במונגו =======
+    // const product = await Product.findByIdAndUpdate(id,
+    //     {
+    //         $set: req.body.x, // עדכון/הוספת שדה לאוביקט
+    //         // $unset: { price: true }, // מחיקת השדה מחיר מוצר למוצר הנוכחי
+    //         $addToSet: { categories: req.body.y }, // הוספת איבר למערך בלי כפולים
+    //     },
+    //     { new: true }); // יחזיר את האוביקט המעודכן
+    
     const product = await Product.findByIdAndUpdate(id,
-        {
-            $set: req.body.x, // עדכון/הוספת שדה לאוביקט
-            // $unset: { price: true }, // מחיקת השדה מחיר מוצר למוצר הנוכחי
-            $addToSet: { categories: req.body.y }, // הוספת איבר למערך בלי כפולים
-        },
+        { $set: req.body }, // עדכון/הוספת שדה לאוביקט
         { new: true }); // יחזיר את האוביקט המעודכן
 
     if (!product) {
