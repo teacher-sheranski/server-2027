@@ -6,7 +6,7 @@
   "scripts": {
     "start": "node --env-file=.env app",
     "dev": "node --env-file=.env --watch app",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "vitest run"
   },
   "keywords": [],
   "author": "",
@@ -18,5 +18,8 @@
     "joi": "^18.3.1",
     "jsonwebtoken": "^9.0.3",
     "mongoose": "^9.11.4"
+  },
+  "devDependencies": {
+    "vitest": "^5.1.1"
   }
 }
