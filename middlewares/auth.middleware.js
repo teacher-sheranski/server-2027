@@ -24,6 +24,8 @@ export const auth = (req, res, next) => {
 };
 
 // האם יש הרשאת מנהל
+// אם יש כמה סוגי הרשאות באתר - פעולות שמורשות למנהל, פעולות למורה, פעולות לתלמיד
+// שיקבל את ההרשאה middleware creator במקום לשכפל ניצור
 export const authAdmin = (req, res, next) => {
     if (req.userData.role !== 'admin') {
         // רשום למערכת עם הרשאה אחרת
