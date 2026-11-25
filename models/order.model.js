@@ -1,6 +1,9 @@
 import { model, Schema, SchemaTypes } from "mongoose";
 
 const orderSchema = new Schema({
+    // קוד משתמש שביצע את ההזמנה
+    userId: { type: SchemaTypes.ObjectId, ref: 'users' },
+
     date: Date,
 
     // 1. Embedded Documents - מסמכים משובצים
@@ -18,7 +21,7 @@ const orderSchema = new Schema({
 
     // 3. 1 + 2
     products: [{
-        _id: {type: SchemaTypes.ObjectId, ref: 'products'},
+        _id: { type: SchemaTypes.ObjectId, ref: 'products' },
         name: String,
         price: Number,
         amount: Number,
