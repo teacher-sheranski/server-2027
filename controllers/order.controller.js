@@ -11,8 +11,20 @@ export const getAllOrders = async (req, res) => {
         throw new AppError("page and limit must be positive integers", 400, "validation-error");
     }
 
+    // משתמש מגיע מתוך הטוקן
+    // { _id, role }
+    // בכל פונקציה שבתוך הקונטרולר ניגש לקוד משתמש דרך הטוקן
+    // ונשאל מה שנרצה
+    const myUser = req.userData;
+    let cond;
+    if (myUser.role === 'admin') {
+        cond = {};
+    } else {
+        cond = { userId: myUser._id }
+    }
+
     const [orders, total] = await Promise.all([
-        Order.find().skip((page - 1) * limit).limit(limit),
+        Order.find(cond).skip((page - 1) * limit).limit(limit),
         Order.countDocuments(),
     ]);
 
@@ -58,6 +70,7 @@ export const addOrder = async (req, res) => {
     // 1. אוביקט "באוויר" לא בדטהבייס
     const order = new Order({
         date: req.body.date ?? new Date(),
+        userId: req.userData._id,
         address: req.body.address,
         products: req.body.products.map(({ _id, amount }) => {
             const product = productsById.get(_id.toLowerCase());
