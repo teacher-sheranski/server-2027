@@ -9,8 +9,16 @@ npm init -y # יצירת קובץ הגדרות לפרויקט
  "scripts": {
     "start": "node app",
     "dev": "node --watch app",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "vitest run"
   },
 
 "type": "module"
+```
+
+## בדיקות
+
+להסבר על בדיקות היחידה בפרויקט ולהרצתן, ראו [TESTING.md](./TESTING.md).
+
+```bash
+npm test
 ```
