@@ -1,5 +1,6 @@
 import jwt from "jsonwebtoken";
 import { AppError } from "../utils/AppError.js";
+import { env } from "../config/env.js";
 // Authorization
 // Authentication
 
@@ -11,7 +12,7 @@ export const auth = (req, res, next) => {
         const { authorization } = req.headers;
         const [, token] = authorization.split(' ');
 
-        const JWT_SECRET = process.env.JWT_SECRET ?? 'secret';
+        const JWT_SECRET = env.JWT_SECRET;
         const user = jwt.verify(token, JWT_SECRET);
 
         // הוספנו את האוביקט של ההרשאות - קוד משתמש ותפקיד לאוביקט הבקשה

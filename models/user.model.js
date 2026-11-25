@@ -1,5 +1,6 @@
 import { model, Schema } from "mongoose";
 import bcrypt from 'bcrypt';
+import { env } from "../config/env.js";
 
 const userSchema = new Schema({
     username:  { type: String, unique: true },
@@ -21,7 +22,7 @@ userSchema.pre(['save', /update/], async function () {
     if (!this.isModified('password')) return;
 
     // מספר הסיבובים של ההצפנה
-    const saltRounds = +process.env.SALT_ROUNDS ?? 12;
+    const saltRounds = env.JWT_SECRET;
     const salt = await bcrypt.genSalt(saltRounds);
 
     // הצפנה

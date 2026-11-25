@@ -5,6 +5,7 @@ import orderRouter from './routes/order.router.js';
 import userRouter from './routes/user.router.js';
 import { printMsg } from './middlewares/custom.middleware.js';
 import { errorHandler, pathNotFound } from './middlewares/errors.middleware.js';
+import { env } from './config/env.js';
 
 // 1. יצירת שרת אקספרס
 const app = express();
@@ -40,7 +41,7 @@ app.use(errorHandler);
 
 // 3. הרצת השרת
 // ?? - null/undefined כמו || עבור
-const port = process.env.PORT ?? 4000;
+const port = env.PORT;
 app.listen(port, () => {
     // בפעם הראשונה שהשרת עולה
     console.log(`Server is running on http://localhost:${port}`);
